@@ -8,14 +8,14 @@ function calcWords (form) {
 	for (let i = 0; i < allWords.length; i++) {
 		let word = allWords[i];
 		let match = true;
-		if (form.startswith.value.length > 0 && !word.startsWith(form.startswith.value)) {
+		if (form.startswith.value.length > 0 && !word.startsWith(form.startswith.value.toLowerCase())) {
 			match = false;
 		}
-		if (match && form.endswith.value.length > 0 && !word.endsWith(form.endswith.value)) {
+		if (match && form.endswith.value.length > 0 && !word.endsWith(form.endswith.value.toLowerCase())) {
 			match = false; 
 		}
 		if (match && form.contains.value.length > 0) {
-			let containsChars = form.contains.value.split("");
+			let containsChars = form.contains.value.toLowerCase().split("");
 			for (let j = 0; j < containsChars.length; j++) {
 				if (!word.includes(containsChars[j])) {
 					match = false;
@@ -26,7 +26,7 @@ function calcWords (form) {
 		
 		// Does not contain
 		if (match && form.noneof.value.length > 0) {
-			let noneChars = form.noneof.value.split("");
+			let noneChars = form.noneof.value.toLowerCase().split("");
 			for (let j = 0; j < noneChars.length; j++) {
 				if (word.includes(noneChars[j])) {
 					match = false;
