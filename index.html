@@ -8,12 +8,17 @@ function calcWords (form) {
 	for (let i = 0; i < allWords.length; i++) {
 		let word = allWords[i];
 		let match = true;
-		if (form.startswith.value.length > 0 && !word.startsWith(form.startswith.value.toLowerCase())) {
-			match = false;
+		
+		// Matching positions
+		for (let j = 0; j < 5; j++) {
+			let boxval = form.elements["m" + j].value.toLowerCase();
+			if ((boxval != "") && (boxval != word.charAt(j))) {
+				match = false;
+				break;
+			}
 		}
-		if (match && form.endswith.value.length > 0 && !word.endsWith(form.endswith.value.toLowerCase())) {
-			match = false; 
-		}
+		
+		// Contains
 		if (match && form.contains.value.length > 0) {
 			let containsChars = form.contains.value.toLowerCase().split("");
 			for (let j = 0; j < containsChars.length; j++) {
@@ -45,11 +50,12 @@ function calcWords (form) {
 </script>
 </head>
 <form name="inputs" action="" method="get">
-Starts with: <br>
-<input type="text" name="startswith" value="">
-<p>
-Ends with: <br>
-<input type="text" name="endswith" value="">
+Matches: <br>
+<input type="text" name="m0" value="" maxlength="1" size="1">
+<input type="text" name="m1" value="" maxlength="1" size="1">
+<input type="text" name="m2" value="" maxlength="1" size="1">
+<input type="text" name="m3" value="" maxlength="1" size="1">
+<input type="text" name="m4" value="" maxlength="1" size="1">
 <p>
 Contains anywhere: <br>
 <input type="text" name="contains" value="">
