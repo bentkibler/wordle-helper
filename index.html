@@ -39,6 +39,20 @@ function calcWords (form) {
 				}
 			}
 		}
+
+		// Out of position
+		for (let p = 1; p < 3; p++) {
+			for (let j = 0; j < 5; j++) {
+				let boxval = form.elements["oop" + p + "-" + j].value.toLowerCase();
+				if (boxval != "") {
+					if ((boxval == word.charAt(j)) || (!word.includes(boxval))) {
+						match = false;
+						break;
+					}
+				}
+			}
+		}
+
 		if (match) {
 			matches.push(" " + word);
 		}
@@ -57,6 +71,20 @@ Matches: <br>
 <input type="text" name="m3" value="" maxlength="1" size="1">
 <input type="text" name="m4" value="" maxlength="1" size="1">
 <p>
+Out of place 1: <br>
+<input type="text" name="oop1-0" value="" maxlength="1" size="1">
+<input type="text" name="oop1-1" value="" maxlength="1" size="1">
+<input type="text" name="oop1-2" value="" maxlength="1" size="1">
+<input type="text" name="oop1-3" value="" maxlength="1" size="1">
+<input type="text" name="oop1-4" value="" maxlength="1" size="1">
+<p>
+Out of place 2: <br>
+<input type="text" name="oop2-0" value="" maxlength="1" size="1">
+<input type="text" name="oop2-1" value="" maxlength="1" size="1">
+<input type="text" name="oop2-2" value="" maxlength="1" size="1">
+<input type="text" name="oop2-3" value="" maxlength="1" size="1">
+<input type="text" name="oop2-4" value="" maxlength="1" size="1">
+<p>
 Contains anywhere: <br>
 <input type="text" name="contains" value="">
 <p>
@@ -66,4 +94,4 @@ Does not contain: <br>
 <input type="button" name="show" Value="Show Possibilities" onClick="calcWords(this.form)">
 </form>
 <p id="results">Click button to view the possibilities!</p>
-</html
+</html>
